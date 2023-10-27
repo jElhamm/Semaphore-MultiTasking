@@ -28,3 +28,15 @@ void Buffer::produce(int producerID, int itemCount) {
     }
 }
   
+void Buffer::consume(int consumerID, int itemCount) {
+    for (int i = 0; i < itemCount; ++i) {
+        std::unique_lock<std::mutex> lock(mtx);
+        bufferFull.wait(lock, [this]() { return !buffer.empty(); });
+        int item = buffer.front();
+        buffer.pop();
+        std::cout << "Consumer " << consumerID << " consumed item: " << item << std::endl;
+        bufferEmpty.notify_all();
+        lock.unlock();
+        std::this_thread::sleep_for(std::chrono::milliseconds(500));            // Adds a delay to simulate a slower production process.
+    }
+}
