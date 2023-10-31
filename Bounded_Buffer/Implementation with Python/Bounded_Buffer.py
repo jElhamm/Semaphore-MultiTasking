@@ -42,7 +42,30 @@ class Buffer:
         # Acquire the lock for bufferFull
         with self.bufferFull:
             self.producers_finished += 1
-            # If all producers have finished, notify all waiting consumers
             if self.producers_finished == itemCount:
                 self.bufferFull.notify_all()
+ 
+    def consume(self, consumerID, itemCount, buffer, producers):
+        for i in range(itemCount):
+            with self.bufferFull:
+                while self.buffer.empty() and self.producers_finished < itemCount:
+                    self.bufferFull.wait()
+
+                # Exit the loop if all producers have finished and the buffer is empty
+                if self.producers_finished == itemCount and self.buffer.empty():
+                    break
+
+                item = self.buffer.get()
+                print(f"Consumer {consumerID} consumed item: {item}")
+
+                # Notify waiting producers if the buffer becomes empty
+                if self.buffer.empty():
+                    self.bufferFull.notify()
+
+            time.sleep(0.5)
+
+        with self.bufferEmpty:
+            # Notify all waiting consumers if all items have been produced
+            if self.items_produced == itemCount * len(producers):
+                self.bufferEmpty.notify_all()
  
