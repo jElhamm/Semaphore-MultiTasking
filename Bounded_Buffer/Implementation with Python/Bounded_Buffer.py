@@ -17,32 +17,32 @@ class Buffer:
         self.producers_finished = 0
         self.items_produced = 0
 
-def produce(self, producerID, itemCount):
-    for i in range(itemCount):
-        # Acquire the lock for bufferEmpty
-        with self.bufferEmpty:
-            while self.buffer.full() and self.producers_finished == 0:
-                self.bufferEmpty.wait()
+    def produce(self, producerID, itemCount):
+        for i in range(itemCount):
+            # Acquire the lock for bufferEmpty
+            with self.bufferEmpty:
+                while self.buffer.full() and self.producers_finished == 0:
+                    self.bufferEmpty.wait()
 
-            # If all producers have finished, exit the loop
-            if self.producers_finished == 1:
-                break
+                # If all producers have finished, exit the loop
+                if self.producers_finished == 1:
+                    break
 
-            item = i + 1
-            self.buffer.put(item)
-            self.items_produced += 1
-            print(f"Producer {producerID} produced item: {item}")
+                item = i + 1
+                self.buffer.put(item)
+                self.items_produced += 1
+                print(f"Producer {producerID} produced item: {item}")
 
-            # If the buffer becomes full, notify waiting consumers
-            if self.buffer.full():
-                self.bufferEmpty.notify()
+                # If the buffer becomes full, notify waiting consumers
+                if self.buffer.full():
+                    self.bufferEmpty.notify()
 
-        time.sleep(0.5)         # Sleep for 0.5 seconds to simulate some processing time
+            time.sleep(0.5)
 
-    # Acquire the lock for bufferFull
-    with self.bufferFull:
-        self.producers_finished += 1
-        # If all producers have finished, notify all waiting consumers
-        if self.producers_finished == itemCount:
-            self.bufferFull.notify_all()
+        # Acquire the lock for bufferFull
+        with self.bufferFull:
+            self.producers_finished += 1
+            # If all producers have finished, notify all waiting consumers
+            if self.producers_finished == itemCount:
+                self.bufferFull.notify_all()
  
