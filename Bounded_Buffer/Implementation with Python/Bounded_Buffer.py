@@ -69,3 +69,49 @@ class Buffer:
             if self.items_produced == itemCount * len(producers):
                 self.bufferEmpty.notify_all()
  
+
+# Display output
+
+def banner():
+    print("""
+          
+################################################################################################################################
+#                                       Producer-Consumer Multithreading                                                       #
+#                                                                                                                              #  
+#                   This program demonstrates the Producer-Consumer problem using multithreading.                              #
+#                 It simulates a scenario where multiple producers produce items and put them into                             #
+#                   a shared buffer, and multiple consumers consume those items from the buffer.                               #
+#                                                                                                                              #
+#       Usage:                                                                                                                 #
+#           1. Enter the buffer capacity, number of producers, number of consumers, and item count per producer/consumer.      #
+#           2. The program will start running and show the item production and consumption process.                            #
+#           3. Once all producers have finished producing the specified number of items, and all consumers                     #
+#              have consumed all the produced items, the program will terminate.                                               #
+################################################################################################################################
+    """)
+
+def main():
+    banner()
+    bufferCapacity = int(input("Enter buffer capacity: "))
+    producerCount = int(input("Enter number of producers: "))
+    consumerCount = int(input("Enter number of consumers: "))
+    itemCount = int(input("Enter item count per producer/consumer: "))
+    buffer = Buffer(bufferCapacity)
+    
+    producers = []
+    for i in range(1, producerCount+1):
+        producers.append(threading.Thread(target=buffer.produce, args=(i, itemCount)))
+    consumers = []
+    for i in range(1, consumerCount+1):
+        consumers.append(threading.Thread(target=buffer.consume, args=(i, itemCount, buffer, producers)))
+    for producerThread in producers:
+        producerThread.start()
+    for consumerThread in consumers:
+        consumerThread.start()
+    for producerThread in producers:
+        producerThread.join()
+    for consumerThread in consumers:
+        consumerThread.join()
+
+if __name__ == "__main__":
+    main()
