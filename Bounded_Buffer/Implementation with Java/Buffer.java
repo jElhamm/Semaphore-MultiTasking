@@ -42,5 +42,26 @@ public class Buffer {
             }
         }
     }
- 
+
+    // Consume items from the buffer by the consumer
+    public void consume(long consumerID, int itemCount) throws InterruptedException {
+        for (int i = 0; i < itemCount; i++) {
+            synchronized (this) {
+                while (buffer.isEmpty() && producersFinished < itemCount) {
+                    wait();
+                }
+                if (producersFinished == itemCount && buffer.isEmpty()) {
+                    break;
+                }
+                int item = buffer.take();
+                System.out.println("Consumer " + consumerID + " consumed item: " + item);
+                Thread.sleep(500);
+            }
+        }
+        synchronized (this) {
+            if (itemsProduced == itemCount) {
+                notifyAll();
+            }
+        }
+    }
 }
