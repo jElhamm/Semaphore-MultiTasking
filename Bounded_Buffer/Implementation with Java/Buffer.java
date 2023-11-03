@@ -9,7 +9,7 @@
  **/
 
 
- 
+
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
@@ -23,6 +23,24 @@ public class Buffer {
         this.buffer = new ArrayBlockingQueue<>(capacity);
         this.producersFinished = 0;
         this.itemsProduced = 0;
+    }
+ 
+    // The produce method is used by producers to add items to the buffer.
+    public void produce(long producerID, int itemCount) throws InterruptedException {
+        for (int i = 0; i < itemCount; i++) {
+            int item = i + 1;
+            buffer.put(item);
+            itemsProduced++;
+            System.out.println("Producer " + producerID + " produced item: " + item);
+
+            Thread.sleep(500);
+        }
+        synchronized (this) {
+            producersFinished++;
+            if (producersFinished == itemCount) {
+                notifyAll();
+            }
+        }
     }
  
 }
