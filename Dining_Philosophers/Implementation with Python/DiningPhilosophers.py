@@ -46,3 +46,50 @@ class Philosopher:
             self.left_fork.put_down()
             print(f"Philosopher {self.id} put down left fork.")
  
+
+
+# Display Output
+
+def banner():
+    print("""
+          
+###########################################################################################
+#                           Dining Philosophers Problem                                   #
+#                                                                                         #
+#   This program simulates the Dining Philosophers problem using threads and locks.       #
+#   It creates a specified number of philosophers and forks. Each philosopher goes        #
+#   through a cycle of thinking, picking up the left and right forks, eating, and         #
+#   putting down the forks. This process is repeated a specified number of times.         #
+#                                                                                         #
+#   Usage:                                                                                #
+#   1. Enter the number of philosophers.                                                  #
+#   2. The program will run and show the actions performed by each philosopher.           #
+#                                                                                         #
+###########################################################################################          
+    """)
+
+def main():
+    banner()
+    philosopher_count = int(input("Enter the number of philosophers: "))
+    fork_count = philosopher_count
+    forks = [Fork(i) for i in range(fork_count)]
+
+    # Create philosophers with IDs starting from 1
+    philosophers = [
+        Philosopher(i + 1, forks[i], forks[(i + 1) % fork_count]) for i in range(philosopher_count)
+    ]
+    # Create threads for each philosopher
+    threads = [
+        threading.Thread(target=philosopher.dine) for philosopher in philosophers
+    ]
+
+    # Start threads
+    for thread in threads:
+        thread.start()
+    # Wait for threads to finish
+    for thread in threads:
+        thread.join()
+
+
+if __name__ == "__main__":
+    main()
