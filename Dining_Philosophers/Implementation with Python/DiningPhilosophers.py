@@ -29,3 +29,20 @@ class Philosopher:
         print(f"Philosopher {self.id} is thinking.")
         time.sleep(1)
  
+    def dine(self):
+        # Each philosopher will eat 3 times
+        for _ in range(3):
+            self.think()
+            # Pick up
+            self.left_fork.pick_up()
+            print(f"Philosopher {self.id} picked up left fork.")
+            self.right_fork.pick_up()
+            print(f"Philosopher {self.id} picked up right fork.")
+            
+            self.eat()
+            # Put down
+            self.right_fork.put_down()
+            print(f"Philosopher {self.id} put down right fork.")
+            self.left_fork.put_down()
+            print(f"Philosopher {self.id} put down left fork.")
+ 
