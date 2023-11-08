@@ -2,6 +2,7 @@
 
 
 import threading
+import time
 
 class Fork:
     def __init__(self, id):
