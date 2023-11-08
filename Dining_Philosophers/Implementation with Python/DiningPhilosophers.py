@@ -15,3 +15,17 @@ class Fork:
     def put_down(self):
         self.lock.release()
  
+class Philosopher:
+    def __init__(self, id, left_fork, right_fork):
+        self.id = id
+        self.left_fork = left_fork
+        self.right_fork = right_fork
+
+    def eat(self):
+        print(f"Philosopher {self.id} is eating.")
+        time.sleep(1)               # Simulating eating
+
+    def think(self):
+        print(f"Philosopher {self.id} is thinking.")
+        time.sleep(1)
+ 
