@@ -25,3 +25,25 @@ class ReaderWriter:
         self.data = new_data
         print(f"** Writer {writer_id} has written data. {new_data}")
  
+    def start_reading(self, reader_id):
+            self.readers_lock.acquire()
+            # If first reader, acquire writer lock
+            if self.readers_count == 0:
+                self.writer_lock.acquire()
+
+            self.readers_count += 1
+            self.readers_lock.release()
+            self.read_data(reader_id)
+            self.readers_lock.acquire()
+            self.readers_count -= 1
+
+            # If last reader, release writer lock
+            if self.readers_count == 0:
+                self.writer_lock.release()
+            self.readers_lock.release()
+
+    def start_writing(self, writer_id):
+        self.writer_lock.acquire()
+        self.write_data(writer_id)
+        self.writer_lock.release()
+ 
