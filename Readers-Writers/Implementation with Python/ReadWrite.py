@@ -47,3 +47,26 @@ class ReaderWriter:
         self.write_data(writer_id)
         self.writer_lock.release()
  
+def simulate_readers_writers(reader_count, writer_count):
+    reader_writer = ReaderWriter()
+    readers = []
+    writers = []
+
+    for i in range(reader_count):
+        readers.append(threading.Thread(target=reader_writer.start_reading, args=(i+1,)))
+    for i in range(writer_count):
+        writers.append(threading.Thread(target=reader_writer.start_writing, args=(i+1,)))
+
+    # Starts
+    for reader in readers:
+        reader.start()
+    for writer in writers:
+        writer.start()
+
+    # Wait for reader threads to finish
+    for reader in readers:
+        reader.join()
+    # Wait for writer threads to finish
+    for writer in writers:
+        writer.join()
+  
