@@ -70,3 +70,34 @@ def simulate_readers_writers(reader_count, writer_count):
     for writer in writers:
         writer.join()
   
+
+
+# Display Output
+
+def banner():
+    print("""
+          
+#################################################################################################
+#                        **  Reader-Writer Problem Simulation  **                               #
+#                                                                                               #
+#          This program simulates the Reader-Writer problem using threads and locks.            #
+#      It creates a specified number of readers and writers. Readers can access the shared      #
+#         resource simultaneously, but writers require exclusive access to the resource.        #
+#                                                                                               #
+#         Usage:                                                                                #
+#         1. Enter the number of readers.                                                       #
+#         2. Enter the number of writers.                                                       #
+#         3. The program will run and show the actions performed by each reader and writer.     #
+#                                                                                               #
+#################################################################################################          
+    """)
+
+def main():
+    banner()
+    reader_count = int(input("---> Enter the number of readers: "))
+    writer_count = int(input("---> Enter the number of writers: "))
+    simulate_readers_writers(reader_count, writer_count)
+
+
+if __name__ == "__main__":
+    main()
