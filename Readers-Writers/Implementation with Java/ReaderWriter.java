@@ -44,4 +44,24 @@ public class ReaderWriter implements ReadWriteInterface {
         }
     }
   
+    public void startReading(int readerId) {
+        readersLock.lock();
+        if (readersCount == 0) {
+            writerLock.lock();
+        }
+        readersCount++;
+        readersLock.unlock();
+        readData(readerId);
+        readersLock.lock();
+        readersCount--;
+        if (readersCount == 0) {
+            writerLock.unlock();
+        }
+        readersLock.unlock();
+    }
+    public void startWriting(int writerId) {
+        writerLock.lock();
+        writeData(writerId);
+        writerLock.unlock();
+    }
 }
