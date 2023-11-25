@@ -39,4 +39,15 @@ public class App {
             });
         }
  
+        try {
+            for (Thread reader : readers) {
+                reader.join();
+            }
+            for (Thread writer : writers) {
+                writer.join();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
