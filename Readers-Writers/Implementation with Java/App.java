@@ -50,4 +50,8 @@ public class App {
             e.printStackTrace();
         }
     }
+    public static int getInput(String prompt) {
+        System.out.print(prompt);
+        return Integer.parseInt(System.console().readLine());
+    }
 }
