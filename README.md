@@ -25,8 +25,10 @@
 
    * Examples of common multi-tasking scenarios:
 
-   
+
       * Producer and consumer agents:
+
+
       [Implementation with C++](Bounded_Buffer/Implementation%20with%20C%2B%2B)
       
       
@@ -37,6 +39,8 @@
 
 
       * Reader and writer:
+
+
       [Implementation with C++](Readers-Writers/Implementation%20with%20C%2B%2B)
       
       
@@ -47,6 +51,8 @@
 
 
       * Dining Philosophers:
+
+
       [Implementation with C++](Dining_Philosophers/Implementation%20with%20C%2B%2B)
 
 
@@ -54,6 +60,8 @@
 
 
       [Implementation with Python](Dining_Philosophers/Implementation%20with%20Python)
+
+      
    * Easy-to-understand code structure and documentation
 
 ## Usage
