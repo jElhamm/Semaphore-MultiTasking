@@ -21,19 +21,39 @@
 ## Features
 
    * [Complete implementation of the Semaphore concept](Implementation%20Of%20Semaphore/Source%20Code)
+
+
    * Examples of common multi-tasking scenarios:
+
+   
       * Producer and consumer agents:
-                          [Implementation with C++](Bounded_Buffer/Implementation%20with%20C%2B%2B)
-                          [Implementation with Java](Bounded_Buffer/Implementation%20with%20Java)
-                          [Implementation with Python](Bounded_Buffer/Implementation%20with%20Python)
+      [Implementation with C++](Bounded_Buffer/Implementation%20with%20C%2B%2B)
+      
+      
+      [Implementation with Java](Bounded_Buffer/Implementation%20with%20Java)
+      
+      
+      [Implementation with Python](Bounded_Buffer/Implementation%20with%20Python)
+
+
       * Reader and writer:
-                          [Implementation with C++](Readers-Writers/Implementation%20with%20C%2B%2B)
-                          [Implementation with Java](Readers-Writers/Implementation%20with%20Java)
-                          [Implementation with Python](Readers-Writers/Implementation%20with%20Python)
+      [Implementation with C++](Readers-Writers/Implementation%20with%20C%2B%2B)
+      
+      
+      [Implementation with Java](Readers-Writers/Implementation%20with%20Java)
+      
+      
+      [Implementation with Python](Readers-Writers/Implementation%20with%20Python)
+
+
       * Dining Philosophers:
-                          [Implementation with C++](Dining_Philosophers/Implementation%20with%20C%2B%2B)
-                          [Implementation with Java](Dining_Philosophers/Implementation%20with%20Java)
-                          [Implementation with Python](Dining_Philosophers/Implementation%20with%20Python)
+      [Implementation with C++](Dining_Philosophers/Implementation%20with%20C%2B%2B)
+
+
+      [Implementation with Java](Dining_Philosophers/Implementation%20with%20Java)
+
+
+      [Implementation with Python](Dining_Philosophers/Implementation%20with%20Python)
    * Easy-to-understand code structure and documentation
 
 ## Usage
@@ -61,13 +81,13 @@ Please refer to the repository's source code and documentation for detailed expl
 
 
 ## References
-
-   BOOK: 
-   * Modern Operating Systems Book by Andrew Tanenbaum.
-   * Operating System Concepts Book by Abraham Silberschatz.
-
    
    * [Semaphores in Process Synchronization](https://www.geeksforgeeks.org/semaphores-in-process-synchronization/)
    * [Implementation of semaphore with C++](https://www.geeksforgeeks.org/cpp-20-semaphore-header/)
    * [Implementation of semaphore with Java](https://geeksforgeeks.org/semaphore-in-java/)
    * [Implementation of semaphore with Python](https://www.geeksforgeeks.org/synchronization-by-using-semaphore-in-python/)
+
+
+   BOOK: 
+   * Modern Operating Systems Book by Andrew Tanenbaum.
+   * Operating System Concepts Book by Abraham Silberschatz.
